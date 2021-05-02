@@ -1,25 +1,30 @@
 import React,{useState, useEffect} from "react"
-import Container from "./Container";
-import {Button, Card} from 'react-bootstrap'
+// import Container from "./Container";
+// import {Button, Card} from 'react-bootstrap'
 import Header from './Components/Header'
 import InfoBox from './Components/InfoBox'
-let data = [{
-  color: "red",
-  title: "NewTitle"
-},
-{
-  color: "blue",
-  title: "VeryNewTitle"
-}]
+// let data = [{
+//   color: "red",
+//   title: "NewTitle"
+// },
+// {
+//   color: "blue",
+//   title: "VeryNewTitle"
+// }]
 
 
 function App(props) {
-  const [counter, setCounter] = useState(0)
+  // const [counter, setCounter] = useState(0)
   const [users, setUsers] = useState([])
-  const [filtered, setFiltered] = useState([])
-  const [show, setShow] = useState(false)
+  const [filtered, setFiltered] = useState(null)
+  const [show] = useState(false)
   const [genderRadio, setGenderRadio] = useState(null)
   const [searchInput, setSearchInput] = useState("")
+
+
+  useEffect(() => {
+    console.log(`HALLO`);
+  },[searchInput, genderRadio])
 
   useEffect(() => {
     console.log('privet')
@@ -53,7 +58,7 @@ function App(props) {
       console.log(e.target.value);
       let filtered = users.filter(user => {
       if(genderRadio){
-      return findGender(user.name)==genderRadio && ( user.name.match( new RegExp(e.target.value,"i")) || user.email.match( new RegExp(e.target.value,"i")))
+      return findGender(user.name)===genderRadio && ( user.name.match( new RegExp(e.target.value,"i")) || user.email.match( new RegExp(e.target.value,"i")))
       }else{
          return user.name.match( new RegExp(e.target.value,"i")) || user.email.match( new RegExp(e.target.value,"i"))
       }
@@ -65,9 +70,9 @@ function App(props) {
       setGenderRadio(genderRadio);
       let filtered = users.filter(user => {
         if(searchInput){
-        return findGender(user.name)==genderRadio && ( user.name.match( new RegExp(searchInput,"i")) || user.email.match( new RegExp(searchInput,"i")))
+        return findGender(user.name)===genderRadio && ( user.name.match( new RegExp(searchInput,"i")) || user.email.match( new RegExp(searchInput,"i")))
         }else{
-           return findGender(user.name)==genderRadio
+           return findGender(user.name)===genderRadio
         }
       })
         setFiltered(filtered);    
@@ -79,7 +84,7 @@ function App(props) {
           {filtered.map(item => <Container data = {item} show = {show} />)}
      </div> */}
      <div style = {{display: "flex", flexWrap: "wrap"}}>
-          {filtered.map(item => <InfoBox data = {item} show = {show} />)}
+          {filtered&&filtered.map(item => <InfoBox key={item.id} data = {item} show = {show} />)}
      </div>
       {/* <div>Hallo {props.user.name} lives in {props.user.city}</div>
       <div>{counter}</div>

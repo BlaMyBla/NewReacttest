@@ -1,7 +1,12 @@
-import {Card, Button} from 'react-bootstrap'
+
+import React, {useState} from 'react';
+import {Card, Button} from 'react-bootstrap';
+import MyModal from './MyModal';
 
 export default function InfoBox(props) {
     
+    const [show,setShow] = useState(false);
+
     return(
         <Card style={{ width: '18rem' }} bg="light">
         {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
@@ -16,6 +21,8 @@ export default function InfoBox(props) {
             the card's content.
             </Card.Text>
             <Button variant="primary">Go somewhere</Button> */}
+            <Button onClick={() => {setShow(!show)}}>Show</Button>
+            {show&&<MyModal />}
         </Card.Body>
         </Card>
     )
