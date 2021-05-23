@@ -2,13 +2,13 @@
 import React, {useState, useEffect} from 'react';
 import {Modal, Button} from 'react-bootstrap';
 
-export default function MyModal() {
+export default function MyModal({name}) {
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     useEffect(() => {
-     let timer = setInterval(() => {console.log("subscribed")}, 1000);
+     let timer = setInterval(() => {console.log("subscribed", name)}, 1000);
      return () => {
        clearInterval(timer);
        console.log(`clear`);

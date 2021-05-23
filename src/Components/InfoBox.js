@@ -22,7 +22,7 @@ export default function InfoBox(props) {
             </Card.Text>
             <Button variant="primary">Go somewhere</Button> */}
             <Button onClick={() => {setShow(!show)}}>Show</Button>
-            {show&&<MyModal />}
+            {show&&<MyModal name = {props.data.name}/>}
         </Card.Body>
         </Card>
     )
